@@ -1,0 +1,21 @@
+---
+- name: Install nginx Server
+  hosts: localhost
+  connection: localhost
+  become: yes
+  tasks:
+   - name: nginx installation
+     apt:
+      name: nginx
+      state: present
+      update_cache: yes 
+   - name: change the content of the file
+     copy:
+      content: "<html><body><h1>Hello, World!</h1></body></html>"
+      dest: /var/www/html/index.nginx-debian.html 
+   - name: Restart nginx
+     service:
+        name: nginx
+        state: restarted   
+
+...
